@@ -15,7 +15,8 @@ export class SearchContainerComponent {
 
   constructor(private searchService: SearchService) { }
 
-  handleSearch(inputValue: string) {
+  handleSearch(inputValue: string)
+  {
     this.loading = true;
     this.searchService.getVideos(inputValue)
       .subscribe((items: any) => {
@@ -36,4 +37,7 @@ export class SearchContainerComponent {
         this.loading = false;
       });
   }
+
+
+
 }

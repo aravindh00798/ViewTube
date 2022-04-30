@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Video } from '../../../shared/models/search.interface';
+import { SearchService } from 'src/app/shared/services/search.service';
 
 @Component({
   selector: 'app-search-list',
@@ -10,8 +11,41 @@ export class SearchListComponent implements OnInit {
 
   @Input() videos: Video[];
 
-  constructor() { }
+  addedToWishList:boolean = false;
+  videos5:Video[]
+  
+  constructor(private youtube:SearchService) { }
 
-  ngOnInit() {
+  ngOnInit()
+   {
+     this.addedToWishList;
+
+     this.handleRemoveWishList;
+
+   }
+
+    handleAddToWishList()
+    {
+      this.youtube.addFav(this.videos).subscribe(()=>{
+        this.addedToWishList=true;
+      
+      })
+      }
+      handleRemoveWishList()
+      {
+        this.youtube.removeFav(this.videos).subscribe(()=>
+        {
+          this.addedToWishList =  false;
+        })
   }
+
+
 }
+
+
+
+
+
+
+
+

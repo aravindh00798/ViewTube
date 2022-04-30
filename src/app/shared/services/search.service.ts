@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -10,7 +9,7 @@ import { Observable } from 'rxjs';
 export class SearchService {
 
   private API_URL = 'https://www.googleapis.com/youtube/v3/search';
-  private API_TOKEN = 'AIzaSyBig3j8GHSZnzGXti5VLW6TGQ1Le8vTgik';
+  private API_TOKEN = 'AIzaSyBQSd-_bqtg5szRlEK2bOvEZMeV6mS2qeY';
 
   constructor(private http: HttpClient) {}
 
@@ -21,4 +20,20 @@ export class SearchService {
         map((response: any) => response.items)
       );
   }
+
+  whishlisturl ="http://localhost:3000/whishlist";
+
+  addFav(VideoId: any){
+    return this.http.post(this.whishlisturl ,{id:VideoId})
+    }
+
+    removeFav(VideoId: any) 
+    {
+      return this.http.delete("http://localhost:3000/whishlist/"+VideoId);
+
+    }
+
+  
+
+
 }

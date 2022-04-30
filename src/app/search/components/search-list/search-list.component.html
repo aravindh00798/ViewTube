@@ -1,5 +1,9 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 <div class="ui four column grid">
   <div class="column" *ngFor="let video of videos">
+    <i *ngIf = "addedToWishList" class="fas fa-heart float-right" (click) = "handleRemoveWishList()"></i> 
+    <i *ngIf = "!addedToWishList" class="far fa-heart float-right" (click) = "handleAddToWishList()"></i>
     <div class="ui card">
       <div class="image">
         <img [src]="video.thumbnail">
@@ -22,6 +26,10 @@
           Watch
         </button>
       </a>
+       
+         
+      
+      
     </div>
   </div>
 </div>

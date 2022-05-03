@@ -11,18 +11,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import { FavHolderComponent } from './fav-holder/fav-holder.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchInputComponent,
     SearchListComponent,
-    SearchContainerComponent
+    SearchContainerComponent,
+    FavHolderComponent,
+   
 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,HttpClientModule, BrowserAnimationsModule,MatIconModule,MatToolbarModule,MatSelectModule,
+    AppRoutingModule,HttpClientModule, BrowserAnimationsModule,MatIconModule,MatToolbarModule,MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

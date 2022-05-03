@@ -11,16 +11,20 @@ export class SearchContainerComponent {
 
   inputTouched = false;
   loading = false;
-  videos: Video[] = [];
+  videosList: Video[]=[]
+  wishlist: any[] = [];
+  
+  
+  
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService,private youtube:SearchService) { }
 
   handleSearch(inputValue: string)
   {
     this.loading = true;
     this.searchService.getVideos(inputValue)
       .subscribe((items: any) => {
-        this.videos = items.map(item => {
+        this.videosList = items.map(item => {
           return {
             title: item.snippet.title,
             videoId: item.id.videoId,
@@ -36,8 +40,13 @@ export class SearchContainerComponent {
         this.inputTouched = true;
         this.loading = false;
       });
+
+      
+
+      }
   }
 
+ 
 
+  
 
-}

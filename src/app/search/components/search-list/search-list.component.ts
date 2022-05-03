@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Video } from '../../../shared/models/search.interface';
 import { SearchService } from 'src/app/shared/services/search.service';
+import { CartService } from 'src/app/service/cart.service';
+
 
 @Component({
   selector: 'app-search-list',
@@ -9,35 +11,62 @@ import { SearchService } from 'src/app/shared/services/search.service';
 })
 export class SearchListComponent implements OnInit {
 
-  @Input() videos: Video[];
+  @Input() videos: Video[] ;
+ 
+ 
+  addedToWishlist: boolean;
+ 
 
-  addedToWishList:boolean = false;
-  videos5:Video[]
   
-  constructor(private youtube:SearchService) { }
+  constructor(private youtube:SearchService,private favservice:CartService) { }
 
   ngOnInit()
    {
-     this.addedToWishList;
-
-     this.handleRemoveWishList;
+     
 
    }
 
-    handleAddToWishList()
+    handleAddToWishList(data:any)
     {
-      this.youtube.addFav(this.videos).subscribe(()=>{
-        this.addedToWishList=true;
-      
+      this.youtube.addFav(data).subscribe(()=>{
+        this.addedToWishlist=true; 
       })
       }
-      handleRemoveWishList()
+
+      handleRemoveWishList(data:any)
       {
-        this.youtube.removeFav(this.videos).subscribe(()=>
+        this.youtube.removeFav(data).subscribe(()=>
         {
-          this.addedToWishList =  false;
+          this.addedToWishlist = false;
+         
+        
         })
   }
+
+  addtofav(video:any)
+  {
+    this.favservice.addtocart(video)
+    this.addedToWishlist=true
+    this.youtube.addFav(video).subscribe(()=>{
+      this.addedToWishlist=true; 
+    })
+
+    
+  
+  }
+  removeVideo(item:any){
+    this.favservice.removeCartItem(item);
+    this.addedToWishlist = false;
+    this.youtube.removeFav(item).subscribe(()=>
+        {
+          this.addedToWishlist = false;
+         
+        
+        })
+    
+  }
+
+  
 
 
 }
